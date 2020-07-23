@@ -84,12 +84,24 @@ class HomeController extends Controller
         ]);
         $temp =  $request->id_question;
 
-        return redirect()->route('detailQuestion', $request->id_question ); 
+        return redirect()->route('detailQuestion', $request->id_question );
     }
 
     public function sort(){
         $question= DB::table('questions')
                     ->orderByDesc('updated_at')->get();
         return view('question', compact('question'));
+    }
+    public function selfDetailQuestion($id)
+    {
+      $question=DB::table('questions')
+                  ->join('users', 'users.id', '=', 'questions.id_user')
+                  ->select('questions.*','users.name')
+                  ->where('questions.id_question', $id)->get();
+      $answer = DB::table('answers')
+                  ->join('users', 'users.id', '=', 'answers.id_user')
+                  ->select('answers.*','users.name')
+                  ->where('answers.id_question', $id)->get();
+      return view('selfDetailQuestion', compact('question', 'answer'));
     }
 }
