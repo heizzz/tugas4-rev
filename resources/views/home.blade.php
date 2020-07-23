@@ -14,10 +14,14 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
-                    <a class="btn btn-primary" href="{{route('listQuestion')}}">List Pertanyaan</a>
-                    <a class="btn btn-primary" href="{{route('selfQuestion')}}">List Pertanyaan yang Dibuat</a>
-                    <a class="btn btn-primary" href="{{route('selfAnswer')}}">List Jawaban yang Dibuat</a>
+                    <div class="text-center text-success">
+                      {{ __('You are logged in!') }}
+                    </div>
+                    <br>
+                    <br>
+                    <a class="btn btn-primary btn-block" href="{{route('listQuestion')}}">List Pertanyaan</a>
+                    <a class="btn btn-primary btn-block" href="{{route('selfQuestion')}}">List Pertanyaan yang Dibuat</a>
+                    <a class="btn btn-primary btn-block" href="{{route('selfAnswer')}}">List Jawaban yang Dibuat</a>
                 </div>
             </div>
         </div>
