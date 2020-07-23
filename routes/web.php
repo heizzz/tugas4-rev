@@ -25,5 +25,9 @@ Route::get('selfQuestion', 'HomeController@selfQuestion')->name('selfQuestion');
 Route::get('selfAnswer', 'HomeController@selfAnswer')->name('selfAnswer');
 Route::post('addQuestion','HomeController@addQuestion')->name('addQuestion');
 Route::get('{id}/detail','HomeController@detailQuestion')->name('detailQuestion');
+Route::get('{id}/selfDetail', 'HomeController@selfDetailQuestion')->name('selfDetailQuestion');
 Route::get('sort','HomeController@sort')->name('sort');
 Route::post('addAnswer','HomeController@addAnswer')->name('addAnswer');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
