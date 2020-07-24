@@ -31,12 +31,14 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function listQuestion(){
+    public function listQuestion() 
+    {
         $question = Question::all();
         return view('question', compact('question'));
     }
 
-    public function selfQuestion(){
+    public function selfQuestion() 
+    {
         $user = Auth::user();
         $question=DB::table('questions')
                     ->where('id_user', $user->id)
@@ -44,20 +46,22 @@ class HomeController extends Controller
         return view('selfQuestion', compact('question'));
     }
 
-    public function selfAnswer(){
+    public function selfAnswer() 
+    {
         $user = Auth::user();
         $answer=DB::table('answers')
                     ->where('id_user', $user->id)
                     ->get();
         return view('selfAnswer', compact('answer'));
     }
-    public function addQuestion(Request $request){
+
+    public function addQuestion(Request $request)
+    {
         $user = Auth::user();
         Question::create([
             'pertanyaan' => $request->question,
             'id_user' => $user->id
         ]);
-        // return ($request);
         return redirect()->route('listQuestion');
     }
 
@@ -70,12 +74,11 @@ class HomeController extends Controller
                     ->join('users', 'users.id', '=', 'answers.id_user')
                     ->select('answers.*','users.name')
                     ->where('answers.id_question', $id)->get();
-        // return ($question);
         return view('detailQuestion', compact('question', 'answer'));
     }
 
-    public function addAnswer(Request $request){
-        // return "masuk";
+    public function addAnswer(Request $request)
+    {
         $user = Auth::user();
         Answer::create([
             'jawaban' => $request->answer,
@@ -87,11 +90,13 @@ class HomeController extends Controller
         return redirect()->route('detailQuestion', $request->id_question );
     }
 
-    public function sort(){
+    public function sort()
+    {
         $question= DB::table('questions')
                     ->orderByDesc('updated_at')->get();
         return view('question', compact('question'));
     }
+    
     public function selfDetailQuestion($id)
     {
       $question=DB::table('questions')
@@ -105,13 +110,31 @@ class HomeController extends Controller
       return view('selfDetailQuestion', compact('question', 'answer'));
     }
 
-    public function edit($id)
+    public function selfDetailAnswer($id)
     {
-        $question = DB::table('questions')->where('id_question', $id)->get();
-        return view('edit', compact('question'));
+      $question=DB::table('questions')
+                  ->join('users', 'users.id', '=', 'questions.id_user')
+                  ->select('questions.*','users.name')
+                  ->where('questions.id_question', $id)->get();
+      $answer = DB::table('answers')
+                  ->join('users', 'users.id', '=', 'answers.id_user')
+                  ->select('answers.*','users.name')
+                  ->where('answers.id_question', $id)->get();
+      return view('selfDetailAnswer', compact('question', 'answer'));
     }
 
-    public function update(Request $request)
+    public function edit_question($id)
+    {
+        $question = DB::table('questions')->where('id_question', $id)->get();
+        return view('edit_question', compact('question'));
+    }
+
+    public function edit_answer($id) {
+        $answer = DB::table('answers')->where('id_answer', $id)->get();
+        return view('edit_answer', compact('answer'));
+    }
+
+    public function update_question(Request $request)
     {
 
         DB::table('questions')->where('id_question', $request->id_question)->update([
@@ -120,10 +143,28 @@ class HomeController extends Controller
         return redirect()->route('listQuestion');
     }
 
-    public function delete($id) {
+    public function update_answer(Request $request)
+    {
+
+        DB::table('answers')->where('id_answer', $request->id_answer)->update([
+            'jawaban' => $request->jawaban
+        ]);
+        return redirect()->route('selfAnswer');
+    }
+
+
+    public function delete_question($id)
+    {
         $question = DB::table('questions')->where('id_question', $id);
         $question->delete();
         return redirect()->route('listQuestion');
+    }
+
+    public function delete_answer($id)
+    {
+        $answer = DB::table('answers')->where('id_answer', $id);
+        $answer->delete();
+        return redirect()->route('selfAnswer');
     }
 
 }
