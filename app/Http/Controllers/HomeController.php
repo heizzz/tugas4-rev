@@ -104,4 +104,26 @@ class HomeController extends Controller
                   ->where('answers.id_question', $id)->get();
       return view('selfDetailQuestion', compact('question', 'answer'));
     }
+
+    public function edit($id)
+    {
+        $question = DB::table('questions')->where('id_question', $id)->get();
+        return view('edit', compact('question'));
+    }
+
+    public function update(Request $request)
+    {
+
+        DB::table('questions')->where('id_question', $request->id_question)->update([
+            'pertanyaan' => $request->pertanyaan
+        ]);
+        return redirect()->route('listQuestion');
+    }
+
+    public function delete($id) {
+        $question = DB::table('questions')->where('id_question', $id);
+        $question->delete();
+        return redirect()->route('listQuestion');
+    }
+
 }
