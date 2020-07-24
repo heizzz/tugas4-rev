@@ -28,6 +28,9 @@ Route::get('{id}/detail','HomeController@detailQuestion')->name('detailQuestion'
 Route::get('{id}/selfDetail', 'HomeController@selfDetailQuestion')->name('selfDetailQuestion');
 Route::get('sort','HomeController@sort')->name('sort');
 Route::post('addAnswer','HomeController@addAnswer')->name('addAnswer');
+Route::get('{id}/edit', 'HomeController@edit')->name('edit');
+Route::put('update','HomeController@update')->name('update');
+Route::get('{id}/delete', 'HomeController@delete')->name('delete');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
