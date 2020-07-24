@@ -61,7 +61,7 @@
             <label>Jawab</label>
             <input type="text" name="answer" class="form-control">
           </div>
-          <a class="btn btn-primary">Tambah Jawaban</a>
+          <button type="submit" class="btn btn-primary">Tambah Jawaban</button>
         </form>
       </div>
     </div>
