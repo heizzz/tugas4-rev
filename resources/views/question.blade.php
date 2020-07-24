@@ -8,7 +8,7 @@
       <label>Pertanyaan Baru</label>
       <input type="text" name="question" class="form-control">
     </div>
-    <a class="btn btn-primary" align="center">Tambah Pertanyaan</a>
+    <button type="submit" class="btn btn-primary" align="center">Tambah Pertanyaan</button>
   </form>
   <div class="row justify-content-center mt-5">
     <div class="col-md-10">
