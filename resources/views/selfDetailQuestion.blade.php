@@ -23,8 +23,8 @@
                 <td>{{$question->name}}</td>
                 <td>{{$question->pertanyaan}}</td>
                 <td>
-                  <a href="#" class="btn btn-warning btn-block">Edit</a>
-                  <a href="#" class="btn btn-danger btn-block">Delete</a>
+                  <a href="{{route('edit', $question->id_question)}}" class="btn btn-warning btn-block">Edit</a>
+                  <a href="{{route('delete', $question->id_question)}}" class="btn btn-danger btn-block">Delete</a>
                 </td>
               </tr>
             </tbody>
