@@ -54,6 +54,7 @@
             </tbody>
           </table>
         </div>
+      </div>
         <form method="POST" action="{{route('addAnswer')}}">
           <input type="hidden" value="{{$question->id_question}}" name="id_question">
           <div class="form-group">
@@ -63,7 +64,6 @@
           </div>
           <button type="submit" class="btn btn-primary">Tambah Jawaban</button>
         </form>
-      </div>
     </div>
   </div>
 
