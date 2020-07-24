@@ -12,7 +12,7 @@
           <table class="table table-striped">
             <thead class="text-left thead-dark">
               <th>No</th>
-              <th>Nama</th>
+              <th>Time</th>
               <th class="col col-xl">Pertanyaan</th>
               <th>Aksi</th>
             </thead>
@@ -20,11 +20,11 @@
               <tr class="text-left">
                 @foreach ($question as $key => $question)
                 <td>{{$key+1}}</td>
-                <td>{{$question->name}}</td>
+                <td>{{$question->updated_at}}</td>
                 <td>{{$question->pertanyaan}}</td>
                 <td>
-                  <a href="{{route('edit', $question->id_question)}}" class="btn btn-warning btn-block">Edit</a>
-                  <a href="{{route('delete', $question->id_question)}}" class="btn btn-danger btn-block">Delete</a>
+                  <a href="{{route('edit_question', $question->id_question)}}" class="btn btn-warning btn-block">Edit</a>
+                  <a href="{{route('delete_question', $question->id_question)}}" class="btn btn-danger btn-block">Delete</a>
                 </td>
               </tr>
             </tbody>
@@ -59,15 +59,6 @@
             </tbody>
           </table>
         </div>
-        <form method="POST" action="{{route('addAnswer')}}">
-          <input type="hidden" value="{{$question->id_question}}" name="id_question">
-          <div class="form-group">
-            @csrf
-            <label>Jawab</label>
-            <input type="text" name="answer" class="form-control">
-          </div>
-          <a class="btn btn-primary">Tambah Jawaban</a>
-        </form>
       </div>
     </div>
   </div>
