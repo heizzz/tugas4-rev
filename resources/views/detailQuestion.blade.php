@@ -11,15 +11,17 @@
         <div class="card-body">
           <table class="table table-striped">
             <thead class="text-left thead-dark">
-              <th>No</th>
+              <!-- <th>No</th> -->
               <th>Nama</th>
+              <th>Time</th>
               <th class="col col-xl">Pertanyaan</th>
             </thead>
             <tbody>
               <tr class="text-left">
                 @foreach ($question as $key => $question)
-                <td>{{$key+1}}</td>
+                <!-- <td>{{$key+1}}</td> -->
                 <td>{{$question->name}}</td>
+                <td>{{$question->updated_at}}</td>
                 <td>{{$question->pertanyaan}}</td>
               </tr>
             </tbody>
@@ -39,16 +41,16 @@
         <div class="card-body">
           <table class="table table-striped">
             <thead class="text-left thead-dark">
-              <th>Name</th>
+              <th>Nama</th>
               <th>Time</th>
-              <th>Answer</th>
+              <th class="col col-xl">Answer</th>
             </thead>
             <tbody>
               @foreach ($answer as $key => $answer)
               <tr class="text-left">
                 <td>{{$answer->name}}</td>
                 <td>{{$answer->updated_at}}</td>
-                <td>{{$answer->jawaban}}</td>
+                <td >{{$answer->jawaban}}</td>
               </tr>
               @endforeach
             </tbody>

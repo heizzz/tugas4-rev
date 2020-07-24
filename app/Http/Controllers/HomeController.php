@@ -33,7 +33,11 @@ class HomeController extends Controller
 
     public function listQuestion() 
     {
-        $question = Question::all();
+        // $question = Question::all();
+        $question=DB::table('questions')
+                    ->join('users', 'users.id', '=', 'questions.id_user')
+                    ->get();
+
         return view('question', compact('question'));
     }
 
@@ -93,7 +97,8 @@ class HomeController extends Controller
     public function sort()
     {
         $question= DB::table('questions')
-                    ->orderByDesc('updated_at')->get();
+                    ->join('users', 'users.id', '=', 'questions.id_user')
+                    ->orderByDesc('questions.updated_at')->get();
         return view('question', compact('question'));
     }
     
@@ -110,16 +115,36 @@ class HomeController extends Controller
       return view('selfDetailQuestion', compact('question', 'answer'));
     }
 
+    // public function selfDetailAnswer($id)
+    // {
+    //   $question=DB::table('questions')
+    //               ->join('users', 'users.id', '=', 'questions.id_user')
+    //               ->select('questions.*','users.name')
+    //               ->where('questions.id_question', $id)->get();
+    //   $answer = DB::table('answers')
+    //               ->join('users', 'users.id', '=', 'answers.id_user')
+    //               ->select('answers.*','users.name')
+    //               ->where('answers.id_question', $id)->get();
+    //   return view('selfDetailAnswer', compact('question', 'answer'));
+    // }
+
     public function selfDetailAnswer($id)
     {
       $question=DB::table('questions')
                   ->join('users', 'users.id', '=', 'questions.id_user')
+                  ->join('answers', 'answers.id_question', '=', 'questions.id_question')
                   ->select('questions.*','users.name')
-                  ->where('questions.id_question', $id)->get();
+                  ->where('answers.id_answer', $id)->get();
+      $temp=DB::table('questions')
+                ->join('answers', 'answers.id_question', '=', 'questions.id_question')
+                ->select('questions.id_question')
+                // ->select
+                ->where('answers.id_answer',$id)->first();
+      $temp = get_object_vars($temp);
       $answer = DB::table('answers')
                   ->join('users', 'users.id', '=', 'answers.id_user')
                   ->select('answers.*','users.name')
-                  ->where('answers.id_question', $id)->get();
+                  ->where('answers.id_question', $temp)->get();
       return view('selfDetailAnswer', compact('question', 'answer'));
     }
 

@@ -12,6 +12,7 @@
           <table class="table table-striped">
             <thead class="text-left thead-dark">
               <th>No</th>
+              <th>Time</th>
               <th class="col-xl">Pertanyaan</th>
               <th>Aksi</th>
             </thead>
@@ -19,6 +20,7 @@
               @foreach($question as $key => $question)
               <tr class="text-left">
                 <td>{{$key+1}}</td>
+                <td>{{$question->updated_at}}</td>
                 <td>{{$question->pertanyaan}}</td>
                 <td><a class="btn btn-primary" href="{{route('selfDetailQuestion', $question->id_question)}}">Lihat</a></td>
               </tr>
