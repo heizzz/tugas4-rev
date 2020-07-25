@@ -168,7 +168,7 @@ class HomeController extends Controller
         DB::table('questions')->where('id_question', $request->id_question)->update([
             'pertanyaan' => $request->pertanyaan
         ]);
-        return redirect()->route('listQuestion');
+        return redirect()->route('selfQuestion');
     }
 
     public function update_answer(Request $request)
@@ -185,7 +185,7 @@ class HomeController extends Controller
     {
         $question = DB::table('questions')->where('id_question', $id);
         $question->delete();
-        return redirect()->route('listQuestion');
+        return redirect()->route('selfQuestion');
     }
 
     public function delete_answer($id)
