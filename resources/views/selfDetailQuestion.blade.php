@@ -19,7 +19,7 @@
             <tbody>
               <tr class="text-left">
                 @foreach ($question as $key => $q)
-                <td>{{$key+1}}</td>
+                <td>{{$key + $question->firstItem()}}</td>
                 <td>{{$q->updated_at}}</td>
                 <td>{{$q->pertanyaan}}</td>
                 <td>
