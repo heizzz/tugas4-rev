@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @foreach($answer as $a)
                     <form method="POST" action="{{ route('update_answer') }}">
-                        @csrf
+                        {{csrf_field()}}
                         @method('PUT')
                         <input type="hidden" class="form-control" name="id_answer" value="{{ $a->id_answer}}">
                         <div class="form-group row">
