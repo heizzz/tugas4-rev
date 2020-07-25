@@ -18,7 +18,7 @@
             <tbody>
               <tr class="text-left">
                 @foreach ($question as $key => $q)
-                <td>{{$key+1}}</td>
+                <td>{{$key + $question->firstItem()}}</td>
                 <td>{{$q->name}}</td>
                 <td>{{$q->pertanyaan}}</td>
               </tr>
