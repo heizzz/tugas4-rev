@@ -17,16 +17,19 @@
               <th>Aksi</th>
             </thead>
             <tbody>
-              @foreach($answer as $key => $answer)
+              @foreach($answer as $key => $a)
               <tr class="text-left">
                 <td>{{$key+1}}</td>
-                <td>{{$answer->updated_at}}</td>
-                <td>{{$answer->jawaban}}</td>
-                <td><a class="btn btn-primary" href="{{route('selfDetailAnswer', $answer->id_answer)}}">Lihat</a></td>
+                <td>{{$a->updated_at}}</td>
+                <td>{{$a->jawaban}}</td>
+                <td><a class="btn btn-primary" href="{{route('selfDetailAnswer', $a->id_answer)}}">Lihat</a></td>
               </tr>
               @endforeach
             </tbody>
           </table>
+
+          {{$answer->links()}}
+          
         </div>
       </div>
     </div>
