@@ -24,7 +24,7 @@
                 <td>{{$q->pertanyaan}}</td>
                 <td>
                   <a href="{{route('edit_question', $q->id_question)}}" class="btn btn-warning btn-block">Edit</a>
-                  <a href="{{route('delete_question', $q->id_question)}}" onclick="return confirm('Confirm delete?')" class="btn btn-danger btn-block">Delete</a>
+                  <a href="{{route('delete_question', $q->id_question)}}" onclick="return confirm('Yakin dihapus?')" class="btn btn-danger btn-block">Delete</a>
                 </td>
               </tr>
             </tbody>
