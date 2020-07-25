@@ -11,10 +11,10 @@
         <div class="card-body">
           <table class="table table-striped">
             <thead class="text-left thead-dark">
-              <th>No</th>
-              <th>Time</th>
-              <th class="col col-xl">Pertanyaan</th>
-              <th>Aksi</th>
+              <th style="width:20px">No</th>
+              <th style="width:100px">Waktu Post</th>
+              <th style="width:450px">Pertanyaan</th>
+              <th style="width:90px">Tindakan</th>
             </thead>
             <tbody>
               <tr class="text-left">
@@ -24,7 +24,7 @@
                 <td>{{$q->pertanyaan}}</td>
                 <td>
                   <a href="{{route('edit_question', $q->id_question)}}" class="btn btn-warning btn-block">Edit</a>
-                  <a href="{{route('delete_question', $q->id_question)}}" class="btn btn-danger btn-block">Delete</a>
+                  <a href="{{route('delete_question', $q->id_question)}}" onclick="return confirm('Confirm delete?')" class="btn btn-danger btn-block">Delete</a>
                 </td>
               </tr>
             </tbody>
@@ -47,15 +47,17 @@
         <div class="card-body">
           <table class="table table-striped">
             <thead class="text-left thead-dark">
-              <th>Name</th>
-              <th>Time</th>
-              <th>Answer</th>
+              <th style="width:20px">No</th>
+              <th style="width:150px">Waktu Post</th>
+              <th style="width:150px">Nama</th>
+              <th style="width:500px">Jawaban</th>
             </thead>
             <tbody>
               @foreach ($answer as $key => $a)
               <tr class="text-left">
-                <td>{{$a->name}}</td>
+                <td>{{$key + $answer->firstItem()}}</td>
                 <td>{{$a->updated_at}}</td>
+                <td>{{$a->name}}</td>
                 <td>{{$a->jawaban}}</td>
               </tr>
               @endforeach
