@@ -31,31 +31,48 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function listQuestion() 
+    public function listQuestion(Request $request) 
     {
-        // $question = Question::all();
-        $question=DB::table('questions')
-                    ->join('users', 'users.id', '=', 'questions.id_user')
-                    ->get();
-
+        
+        if ($request->has('search'))
+        {
+            $question = DB::table('questions')
+                        ->join('users', 'users.id', '=', 'questions.id_user')
+                        ->select('questions.*','users.name')
+                        ->where('pertanyaan', 'LIKE', '%'.$request->search.'%')->paginate(10);
+        }
+        else
+        {
+            $question = DB::table('questions')
+                        ->join('users', 'users.id', '=', 'questions.id_user')
+                        ->select('questions.*','users.name')
+                        ->paginate(10);
+        }
         return view('question', compact('question'));
     }
 
-    public function selfQuestion() 
+    public function selfQuestion(Request $request) 
     {
-        $user = Auth::user();
-        $question=DB::table('questions')
-                    ->where('id_user', $user->id)
-                    ->get();
+        if ($request->has('search')) {
+            $user = Auth::user();
+            $question = DB::table('questions')
+                        ->where('pertanyaan', 'LIKE', '%'.$request->search.'%')->paginate(10);
+        }
+        else {
+            $user = Auth::user();
+            $question = DB::table('questions')
+                        ->where('id_user', $user->id)
+                        ->paginate(10);
+        }
         return view('selfQuestion', compact('question'));
     }
 
     public function selfAnswer() 
     {
         $user = Auth::user();
-        $answer=DB::table('answers')
+        $answer = DB::table('answers')
                     ->where('id_user', $user->id)
-                    ->get();
+                    ->paginate(10);
         return view('selfAnswer', compact('answer'));
     }
 
@@ -70,14 +87,14 @@ class HomeController extends Controller
     }
 
     public function detailQuestion($id){
-        $question=DB::table('questions')
+        $question = DB::table('questions')
                     ->join('users', 'users.id', '=', 'questions.id_user')
                     ->select('questions.*','users.name')
-                    ->where('questions.id_question', $id)->get();
+                    ->where('questions.id_question', $id)->paginate(10);
         $answer = DB::table('answers')
                     ->join('users', 'users.id', '=', 'answers.id_user')
                     ->select('answers.*','users.name')
-                    ->where('answers.id_question', $id)->get();
+                    ->where('answers.id_question', $id)->paginate(10);
         return view('detailQuestion', compact('question', 'answer'));
     }
 
@@ -98,7 +115,7 @@ class HomeController extends Controller
     {
         $question= DB::table('questions')
                     ->join('users', 'users.id', '=', 'questions.id_user')
-                    ->orderByDesc('questions.updated_at')->get();
+                    ->orderByDesc('questions.updated_at')->paginate(10);
         return view('question', compact('question'));
     }
     
@@ -107,45 +124,31 @@ class HomeController extends Controller
       $question=DB::table('questions')
                   ->join('users', 'users.id', '=', 'questions.id_user')
                   ->select('questions.*','users.name')
-                  ->where('questions.id_question', $id)->get();
+                  ->where('questions.id_question', $id)->paginate(10);
       $answer = DB::table('answers')
                   ->join('users', 'users.id', '=', 'answers.id_user')
                   ->select('answers.*','users.name')
-                  ->where('answers.id_question', $id)->get();
+                  ->where('answers.id_question', $id)->paginate(10);
       return view('selfDetailQuestion', compact('question', 'answer'));
     }
 
-    // public function selfDetailAnswer($id)
-    // {
-    //   $question=DB::table('questions')
-    //               ->join('users', 'users.id', '=', 'questions.id_user')
-    //               ->select('questions.*','users.name')
-    //               ->where('questions.id_question', $id)->get();
-    //   $answer = DB::table('answers')
-    //               ->join('users', 'users.id', '=', 'answers.id_user')
-    //               ->select('answers.*','users.name')
-    //               ->where('answers.id_question', $id)->get();
-    //   return view('selfDetailAnswer', compact('question', 'answer'));
-    // }
-
     public function selfDetailAnswer($id)
     {
-      $question=DB::table('questions')
-                  ->join('users', 'users.id', '=', 'questions.id_user')
-                  ->join('answers', 'answers.id_question', '=', 'questions.id_question')
-                  ->select('questions.*','users.name')
-                  ->where('answers.id_answer', $id)->get();
-      $temp=DB::table('questions')
+        $question = DB::table('questions')
+                    ->join('users', 'users.id', '=', 'questions.id_user')
+                    ->join('answers', 'answers.id_question', '=', 'questions.id_question')
+                    ->select('questions.*','users.name')
+                    ->where('answers.id_answer', $id)->paginate(10);
+        $temp = DB::table('questions')
                 ->join('answers', 'answers.id_question', '=', 'questions.id_question')
                 ->select('questions.id_question')
-                // ->select
                 ->where('answers.id_answer',$id)->first();
-      $temp = get_object_vars($temp);
-      $answer = DB::table('answers')
+        $temp = get_object_vars($temp);
+        $answer = DB::table('answers')
                   ->join('users', 'users.id', '=', 'answers.id_user')
                   ->select('answers.*','users.name')
-                  ->where('answers.id_question', $temp)->get();
-      return view('selfDetailAnswer', compact('question', 'answer'));
+                  ->where('answers.id_question', $temp)->paginate(10);
+        return view('selfDetailAnswer', compact('question', 'answer'));
     }
 
     public function edit_question($id)
