@@ -17,10 +17,10 @@
             </thead>
             <tbody>
               <tr class="text-left">
-                @foreach ($question as $key => $question)
+                @foreach ($question as $key => $q)
                 <td>{{$key+1}}</td>
-                <td>{{$question->name}}</td>
-                <td>{{$question->pertanyaan}}</td>
+                <td>{{$q->name}}</td>
+                <td>{{$q->pertanyaan}}</td>
               </tr>
             </tbody>
           </table>
@@ -28,6 +28,9 @@
       </div>
       <br>
       @endforeach
+
+      {{$question->links()}}
+      
     </div>
   </div>
   
@@ -45,18 +48,21 @@
               <th>Aksi</th>
             </thead>
             <tbody>
-              @foreach ($answer as $key => $answer)
+              @foreach ($answer as $key => $a)
               <tr class="text-left">
-                <td>{{$answer->updated_at}}</td>
-                <td>{{$answer->jawaban}}</td>
+                <td>{{$a->updated_at}}</td>
+                <td>{{$a->jawaban}}</td>
                 <td>
-                  <a href="{{route('edit_answer', $answer->id_answer)}}" class="btn btn-warning btn-block">Edit</a>
-                  <a href="{{route('delete_answer', $answer->id_answer)}}" class="btn btn-danger btn-block">Delete</a>
+                  <a href="{{route('edit_answer', $a->id_answer)}}" class="btn btn-warning btn-block">Edit</a>
+                  <a href="{{route('delete_answer', $a->id_answer)}}" class="btn btn-danger btn-block">Delete</a>
                 </td>
               </tr>
               @endforeach
             </tbody>
           </table>
+
+          {{$answer->links()}}
+
         </div>
       </div>
     </div>
