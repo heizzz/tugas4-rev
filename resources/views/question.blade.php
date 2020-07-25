@@ -58,7 +58,7 @@
       <div class="modal-body">
         <form method="POST" action="{{route('addQuestion')}}">
           <div class="form-group">
-            @csrf
+            {{csrf_field()}}
             <label for="exampleFormControlTextarea1">Pertanyaan</label>
             <input type="text" name="question" class="form-control" required></textarea>
           </div>
