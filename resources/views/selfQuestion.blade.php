@@ -17,10 +17,10 @@
         <div class="card-body">
           <table class="table table-striped">
             <thead class="text-left thead-dark">
-              <th>No</th>
-              <th>Time</th>
-              <th class="col-xl">Pertanyaan</th>
-              <th>Aksi</th>
+              <th style="width:20px">No</th>
+              <th style="width:100px">Waktu Post</th>
+              <th style="width:450px">Pertanyaan</th>
+              <th style="width:90px">Tindakan</th>
             </thead>
             <tbody>
               @foreach($question as $key => $q)
