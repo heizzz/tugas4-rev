@@ -19,7 +19,7 @@
             <tbody>
               @foreach($answer as $key => $a)
               <tr class="text-left">
-                <td>{{$key+1}}</td>
+                <td>{{$key + $question->firstItem()}}</td>
                 <td>{{$a->updated_at}}</td>
                 <td>{{$a->jawaban}}</td>
                 <td><a class="btn btn-primary" href="{{route('selfDetailAnswer', $a->id_answer)}}">Lihat</a></td>
