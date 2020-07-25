@@ -34,7 +34,7 @@
             <tbody>
               @foreach($question as $key => $q)
               <tr class="text-left">
-                <td>{{$key + 1}}</td>
+                <td>{{$key + $question->firstItem()}}</td>
                 <td>{{$q->name}}</td>
                 <td>{{$q->updated_at}}</td>
                 <td>{{$q->pertanyaan}}</td>
