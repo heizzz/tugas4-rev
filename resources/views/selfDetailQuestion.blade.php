@@ -18,13 +18,13 @@
             </thead>
             <tbody>
               <tr class="text-left">
-                @foreach ($question as $key => $question)
+                @foreach ($question as $key => $q)
                 <td>{{$key+1}}</td>
-                <td>{{$question->updated_at}}</td>
-                <td>{{$question->pertanyaan}}</td>
+                <td>{{$q->updated_at}}</td>
+                <td>{{$q->pertanyaan}}</td>
                 <td>
-                  <a href="{{route('edit_question', $question->id_question)}}" class="btn btn-warning btn-block">Edit</a>
-                  <a href="{{route('delete_question', $question->id_question)}}" class="btn btn-danger btn-block">Delete</a>
+                  <a href="{{route('edit_question', $q->id_question)}}" class="btn btn-warning btn-block">Edit</a>
+                  <a href="{{route('delete_question', $q->id_question)}}" class="btn btn-danger btn-block">Delete</a>
                 </td>
               </tr>
             </tbody>
@@ -33,6 +33,9 @@
       </div>
       <br>
       @endforeach
+
+      {{$question->links()}}
+      
     </div>
   </div>
   <div class="row justify-content-center mt-5">
@@ -49,15 +52,18 @@
               <th>Answer</th>
             </thead>
             <tbody>
-              @foreach ($answer as $key => $answer)
+              @foreach ($answer as $key => $a)
               <tr class="text-left">
-                <td>{{$answer->name}}</td>
-                <td>{{$answer->updated_at}}</td>
-                <td>{{$answer->jawaban}}</td>
+                <td>{{$a->name}}</td>
+                <td>{{$a->updated_at}}</td>
+                <td>{{$a->jawaban}}</td>
               </tr>
               @endforeach
             </tbody>
           </table>
+
+          {{$answer->links()}}
+
         </div>
       </div>
     </div>
